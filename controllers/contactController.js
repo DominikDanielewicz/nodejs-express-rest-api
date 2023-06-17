@@ -1,4 +1,3 @@
-const Joi = require("joi");
 const {
   listContacts,
   getContactById,
@@ -7,27 +6,20 @@ const {
   updateContact,
 } = require("../service");
 
-const phonePattern =
-  /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/;
+// const phonePattern =
+//   /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/;
 
-const addSchema = Joi.object({
-  name: Joi.string(),
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: true } }),
-  phone: Joi.string().pattern(phonePattern),
-  favorite: Joi.boolean(),
-});
-
-const validateSchema = (schema, res, body) => {
-  const { error } = schema.validate(body);
-  if (error) {
-    return res.status(400).json({
-      status: "fail",
-      code: 400,
-      message: error.details[0].message,
-      data: null,
-    });
-  }
-};
+// const validateSchema = (schema, res, body) => {
+//   const { error } = schema.validate(body);
+//   if (error) {
+//     return res.status(400).json({
+//       status: "fail",
+//       code: 400,
+//       message: error.details[0].message,
+//       data: null,
+//     });
+//   }
+// };
 
 const checkID = async (_, res, next, val) => {
   try {
@@ -77,7 +69,6 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    validateSchema(addSchema, res, res.body);
     const newContact = await createContact(req.body);
     res.status(201).json({
       status: "success",
@@ -115,7 +106,6 @@ const update = async (req, res, next) => {
         data: null,
       });
     }
-    validateSchema(addSchema, res, res.body);
     const updatedContact = await updateContact(req.params.contactId, req.body);
     res.status(200).json({
       status: "success",
