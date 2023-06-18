@@ -8,21 +8,24 @@ To manage data I'm using MongoDB and Mongoose.
 
 ### The REST API supports the following routes
 
-Contacts
-GET /api/contacts
-GET /api/contacts/:id
-POST /api/contacts
-DELETE /api/contacts/:id
-PUT /api/contacts/:id
-PATCH /api/contacts/:id
+#### Contacts
 
-Users
-GET /api/users/current
+- `GET /api/contacts`
+- `GET /api/contacts/:id`
+- `POST /api/contacts`
+- `DELETE /api/contacts/:id`
+- `PUT /api/contacts/:id`
+- `PATCH /api/contacts/:id`
 
-Auth
-GET /api/users/logout
-POST /api/users/login
-POST /api/users/signup
+#### Users
+
+- `GET /api/users/current`
+
+#### Auth
+
+- `GET /api/users/logout`
+- `POST /api/users/login`
+- `POST /api/users/signup`
 
 ### Commands
 

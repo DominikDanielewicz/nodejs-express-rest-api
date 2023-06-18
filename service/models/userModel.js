@@ -22,7 +22,10 @@ const userSchema = mongoose.Schema({
   },
   subscription: {
     type: String,
-    enum: ["starter", "pro", "business"],
+    enum: {
+      values: ["starter", "pro", "business"],
+      message: "Wrong field subscription",
+    },
     default: "starter",
   },
   token: {
