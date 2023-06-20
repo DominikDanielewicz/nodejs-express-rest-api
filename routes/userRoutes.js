@@ -16,6 +16,6 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.get("/logout", protect, logout);
 router.get("/current", protect, getCurrentUser);
-router.patch("/:userId", updateSubscription);
+router.patch("/:userId", protect, updateSubscription);
 
 module.exports = router;
