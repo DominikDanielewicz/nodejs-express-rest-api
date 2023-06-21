@@ -3,7 +3,9 @@ const contactController = require("../controllers/contactController");
 const router = express.Router();
 const { protect } = require("./../controllers/authController");
 
+router.param("contactId", protect);
 router.param("contactId", contactController.checkID);
+
 router
   .route("/")
   .get(protect, contactController.get)
@@ -11,12 +13,10 @@ router
 
 router
   .route("/:contactId")
-  .get(protect, contactController.getById)
-  .put(protect, contactController.update)
-  .delete(protect, contactController.remove);
+  .get(contactController.getById)
+  .put(contactController.update)
+  .delete(contactController.remove);
 
-router
-  .route("/:contactId/favorite")
-  .patch(protect, contactController.updateStatus);
+router.route("/:contactId/favorite").patch(contactController.updateStatus);
 
 module.exports = router;

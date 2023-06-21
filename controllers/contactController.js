@@ -21,9 +21,10 @@ const {
 //   }
 // };
 
-const checkID = async (_, res, next, val) => {
+const checkID = async (req, res, next, val) => {
   try {
-    const contacts = await listContacts();
+    const contacts = await listContacts(req.user._id);
+    console.log(contacts.find((contact) => contact.id === val));
     if (!contacts.find((contact) => contact.id === val)) {
       return res.status(404).json({
         status: "fail",
@@ -39,9 +40,9 @@ const checkID = async (_, res, next, val) => {
   }
 };
 
-const get = async (_, res, next) => {
+const get = async (req, res, next) => {
   try {
-    const contacts = await listContacts();
+    const contacts = await listContacts(req.user._id);
     res.status(200).json({
       status: "success",
       code: 200,
@@ -55,7 +56,7 @@ const get = async (_, res, next) => {
 
 const getById = async (req, res, next) => {
   try {
-    const contact = await getContactById(req.params.contactId);
+    const contact = await getContactById(req.params.contactId, req.user._id);
     res.status(200).json({
       status: "success",
       code: 200,
@@ -69,7 +70,7 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const newContact = await createContact(req.body);
+    const newContact = await createContact(req.body, req.user._id);
     res.status(201).json({
       status: "success",
       code: 201,
@@ -83,7 +84,7 @@ const create = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    await removeContact(req.params.contactId);
+    await removeContact(req.params.contactId, req.user._id);
     res.status(200).json({
       status: "success",
       code: 200,
@@ -106,7 +107,11 @@ const update = async (req, res, next) => {
         data: null,
       });
     }
-    const updatedContact = await updateContact(req.params.contactId, req.body);
+    const updatedContact = await updateContact(
+      req.params.contactId,
+      req.body,
+      req.user._id
+    );
     res.status(200).json({
       status: "success",
       code: 200,
@@ -130,9 +135,13 @@ const updateStatus = async (req, res, next) => {
       });
     }
 
-    const updatedContact = await updateContact(req.params.contactId, {
-      favorite,
-    });
+    const updatedContact = await updateContact(
+      req.params.contactId,
+      {
+        favorite,
+      },
+      req.user._id
+    );
     res.status(200).json({
       status: "success",
       code: 200,
