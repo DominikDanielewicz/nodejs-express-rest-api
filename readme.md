@@ -1,16 +1,31 @@
 # Node.js module
 
-It's a REST API built to work with a collection of contacts.
-To work with the REST API, I used Postman. For simple data validation I used Joi package https://joi.dev/
-In the previous version I was working with JSON file. In this version I'm using MongoDB and Mongoose manage data.
+WORK IN PROGRESS
+It's a REST API built to work with a collection of contacts. I prepared user authentication/authorization logic using JWT (https://jwt.io/)
+To work with the REST API, I used Postman.
+For simple data validation validator package.
+To manage data I'm using MongoDB and Mongoose.
 
 ### The REST API supports the following routes
 
-GET /api/contacts
-GET /api/contacts/:id
-POST /api/contacts
-DELETE /api/contacts/:id
-PUT /api/contacts/:id
+#### Contacts
+
+- `GET /api/contacts`
+- `GET /api/contacts/:id`
+- `POST /api/contacts`
+- `DELETE /api/contacts/:id`
+- `PUT /api/contacts/:id`
+- `PATCH /api/contacts/:id`
+
+#### Users
+
+- `GET /api/users/current`
+
+#### Auth
+
+- `GET /api/users/logout`
+- `POST /api/users/login`
+- `POST /api/users/signup`
 
 ### Commands
 
