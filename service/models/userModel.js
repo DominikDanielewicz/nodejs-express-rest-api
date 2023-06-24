@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
+  avatarURL: {
+    type: String,
+  },
   subscription: {
     type: String,
     enum: {

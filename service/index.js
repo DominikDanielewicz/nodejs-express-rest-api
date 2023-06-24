@@ -1,8 +1,8 @@
 const Contact = require("./models/contactModel");
 const User = require("./models/userModel");
 
-const listContacts = (user) => {
-  return Contact.find({ owner: user });
+const listContacts = (user, query) => {
+  return Contact.find({ owner: user, ...query });
 };
 
 const getContactById = (id, user) => {
