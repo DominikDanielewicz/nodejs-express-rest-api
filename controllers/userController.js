@@ -106,7 +106,6 @@ const createAvatar = async (path, res, filename) => {
 };
 
 const updateAvatar = async (req, res, next) => {
-  console.log(req.file);
   const currentUser = req.user;
   try {
     await createAvatar(req.file.path, res, req.file.filename);

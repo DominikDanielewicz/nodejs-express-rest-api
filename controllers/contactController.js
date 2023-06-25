@@ -6,7 +6,7 @@ const {
   updateContact,
 } = require("../service");
 
-const Contact = require("./../service/index");
+const Contact = require("./../service/models/contactModel");
 
 // const phonePattern =
 //   /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/;
@@ -26,7 +26,6 @@ const Contact = require("./../service/index");
 const checkID = async (req, res, next, val) => {
   try {
     const contacts = await listContacts(req.user._id);
-    console.log(contacts.find((contact) => contact.id === val));
     if (!contacts.find((contact) => contact.id === val)) {
       return res.status(404).json({
         status: "fail",
