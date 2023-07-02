@@ -5,6 +5,8 @@ const {
   login,
   logout,
   protect,
+  verifyEmail,
+  resendVerificationEmail,
 } = require("./../controllers/authController");
 const {
   getCurrentUser,
@@ -17,6 +19,9 @@ const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.get("/verify/:verificationToken", verifyEmail);
+router.post("/verify", resendVerificationEmail);
+
 router.get("/logout", protect, logout);
 router.get("/current", protect, getCurrentUser);
 router.patch("/", protect, updateSubscription);
